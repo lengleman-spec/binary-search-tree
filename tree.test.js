@@ -21,4 +21,11 @@ describe("Tree includes", () => {
 
     expect(tree.includes(4)).toBe(true);
   });
+
+  test("insert does not add duplicate value", () => {
+    const tree = new Tree([1, 3, 5]);
+    tree.insert(1);
+
+    expect(tree.includes(1)).toBe(true);
+  });
 });
