@@ -61,6 +61,62 @@ class Tree {
       }
     }
   }
+
+  delete(value) {
+    this.root = this.removeNode(this.root, value);
+  }
+
+  removeNode(node, value) {
+    if (node === null) return null; // base case, value not found
+
+    if (value < node.data) {
+      node.left = this.removeNode(node.left, value);
+      return node;
+    } else if (value > node.data) {
+      node.right = this.removeNode(node.right, value);
+      return node;
+    } else {
+      // Node to delete found
+
+      // Case 1: No children (leaf)
+      if (node.left === null && node.right === null) return null;
+
+      // Case 2: One child
+      if (node.left === null) return node.right;
+      if (node.right === null) return node.left;
+
+      // Case 3: Two children
+      // Find the smallest value in the right subtree
+      let tempNode = node.right;
+      while (tempNode.left !== null) {
+        tempNode = tempNode.left;
+      }
+
+      // Replace current node's data with that value
+      node.data = tempNode.data;
+
+      // Delete the duplicate node in the right subtree
+      node.right = this.removeNode(node.right, tempNode.data);
+
+      return node;
+    }
+  }
+
+  levelOrderForEach(callback) {
+    if (!callback) {
+      throw new Error("Callback is required");
+    }
+
+    let queue = [this.root];
+
+    while (queue.length > 0) {
+      let node = queue.shift(); // remove the first node
+      callback(node.value); // call callback on its value
+
+      if (node.left) queue.push(node.left); // add left child
+      if (node.right) queue.push(node.right); // add right child
+    }
+  }
 }
 
 module.exports = Tree;
