@@ -117,6 +117,42 @@ class Tree {
       if (node.right) queue.push(node.right); // add right child
     }
   }
+
+  inOrderForEach(callback) {
+    if (!callback) {
+      throw new Error("Callback is required");
+    }
+
+    if (this.left) {
+      this.left.inOrderForEach(callback);
+    }
+
+    callback(this.value);
+
+    if (this.right) {
+      this.right.inOrderForEach(callback);
+    }
+  }
+
+  preOrderForEach(callback) {
+    if (!callback) {
+      throw new Error("Callback is required");
+    }
+
+    callback(this.value);
+    if (this.left) this.left.preOrderForEach(callback);
+    if (this.right) this.right.preOrderForEach(callback);
+  }
+
+  postOrderForEach(callback) {
+    if (!callback) {
+      throw new Error("Callback is required");
+    }
+
+    if (this.left) this.left.postOrderForEach(callback);
+    if (this.right) this.right.postOrderForEach(callback);
+    callback(this.value);
+  }
 }
 
 module.exports = Tree;
