@@ -153,6 +153,22 @@ class Tree {
     if (this.right) this.right.postOrderForEach(callback);
     callback(this.value);
   }
+
+  height(value) {
+    // Helper function:
+    function nodeHeight(node) {
+      if (!node) return -1; // base case
+
+      const leftHeight = nodeHeight(node.left);
+      const rightHeight = nodeHeight(node.right);
+
+      return 1 + Math.max(leftHeight, rightHeight);
+    }
+    if (this.value === value) return nodeHeight(this);
+    else if (value < this.value && this.left) return this.left.height(value);
+    else if (value > this.value && this.right) return this.right.height(value);
+    else return undefined; // not found
+  }
 }
 
 module.exports = Tree;
