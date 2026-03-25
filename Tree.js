@@ -1,3 +1,5 @@
+const Node = require("./Node"); // "./Node" because Node.js is in the same folder
+
 class Tree {
   constructor(array) {
     this.root = this.buildTree(array);
@@ -20,16 +22,17 @@ class Tree {
   includes(value) {
     let currentNode = this.root; // starts at root
     while (currentNode !== null) {
-      if (value === currentNode) {
+      if (value === currentNode.data) {
         return true;
       }
-      if (value < currentNode) {
+      if (value < currentNode.data) {
         currentNode = currentNode.left;
-      }
-      if (value < currentNode) {
+      } else if (value > currentNode.data) {
         currentNode = currentNode.right;
       }
     }
     return false;
   }
 }
+
+module.exports = Tree;
