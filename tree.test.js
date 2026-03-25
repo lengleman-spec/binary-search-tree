@@ -14,4 +14,11 @@ describe("Tree includes", () => {
 
     expect(tree.includes(10)).toBe(false);
   });
+
+  test("insert will insert a new value", () => {
+    const tree = new Tree([1, 3, 5]);
+    tree.insert(4);
+
+    expect(tree.includes(4)).toBe(true);
+  });
 });

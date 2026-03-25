@@ -33,6 +33,34 @@ class Tree {
     }
     return false;
   }
+
+  insert(value) {
+    if (!this.root) {
+      this.root = new Node(value);
+      return;
+    }
+
+    let currentNode = this.root;
+    while (true) {
+      if (value === currentNode.data) return; // no duplicates
+
+      if (value < currentNode.data) {
+        if (currentNode.left === null) {
+          currentNode.left = new Node(value);
+          return;
+        } else {
+          currentNode = currentNode.left;
+        }
+      } else {
+        if (currentNode.right === null) {
+          currentNode.right = new Node(value);
+          return;
+        } else {
+          currentNode = currentNode.right;
+        }
+      }
+    }
+  }
 }
 
 module.exports = Tree;
