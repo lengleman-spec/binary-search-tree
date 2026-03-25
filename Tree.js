@@ -155,19 +155,19 @@ class Tree {
   }
 
   height(value) {
-    // Helper function:
     function nodeHeight(node) {
-      if (!node) return -1; // base case
-
-      const leftHeight = nodeHeight(node.left);
-      const rightHeight = nodeHeight(node.right);
-
-      return 1 + Math.max(leftHeight, rightHeight);
+      if (!node) return -1;
+      return 1 + Math.max(nodeHeight(node.left), nodeHeight(node.right));
     }
-    if (this.value === value) return nodeHeight(this);
-    else if (value < this.value && this.left) return this.left.height(value);
-    else if (value > this.value && this.right) return this.right.height(value);
-    else return undefined; // not found
+
+    function search(node) {
+      if (!node) return undefined;
+      if (node.data === value) return nodeHeight(node);
+      else if (value < node.data) return search(node.left);
+      else return search(node.right);
+    }
+
+    return search(this.root);
   }
 }
 

@@ -28,4 +28,17 @@ describe("Tree includes", () => {
 
     expect(tree.includes(1)).toBe(true);
   });
+
+  test("height returns correct height for a node", () => {
+    const tree = new Tree([2, 5, 7, 10, 12, 15]);
+
+    tree.insert(5);
+    tree.insert(15);
+    tree.insert(2);
+    tree.insert(7);
+    tree.insert(12);
+
+    expect(tree.height(10)).toBe(2);
+    expect(tree.height(99)).toBeUndefined();
+  });
 });
