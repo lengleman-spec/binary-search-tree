@@ -59,5 +59,9 @@ describe("Tree includes", () => {
     tree.insert(5);
 
     expect(tree.isBalanced()).toBe(false);
+
+    tree.rebalance();
+
+    expect(tree.isBalanced()).toBe(true);
   });
 });
