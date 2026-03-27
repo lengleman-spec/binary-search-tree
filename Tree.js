@@ -169,6 +169,25 @@ class Tree {
 
     return search(this.root);
   }
+
+  depth(value) {
+    let currentNode = this.root;
+    let depth = 0;
+
+    while (currentNode !== null) {
+      if (currentNode.data === value) {
+        return depth;
+      }
+
+      if (value < currentNode.data) {
+        currentNode = currentNode.left;
+      } else {
+        currentNode = currentNode.right;
+      }
+      depth++;
+    }
+    return undefined;
+  }
 }
 
 module.exports = Tree;

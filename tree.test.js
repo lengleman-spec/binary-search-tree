@@ -41,4 +41,13 @@ describe("Tree includes", () => {
     expect(tree.height(10)).toBe(2);
     expect(tree.height(99)).toBeUndefined();
   });
+
+  test("depth returns the depth of the node with the given value", () => {
+    const tree = new Tree([2, 5, 7, 10, 12, 15]);
+
+    expect(tree.depth(10)).toBe(0);
+    expect(tree.depth(5)).toBe(1);
+    expect(tree.depth(2)).toBe(2);
+    expect(tree.depth(99)).toBeUndefined();
+  });
 });
