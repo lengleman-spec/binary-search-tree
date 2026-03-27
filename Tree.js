@@ -188,6 +188,32 @@ class Tree {
     }
     return undefined;
   }
+
+  isBalanced() {
+    function check(node) {
+      if (!node) return true;
+
+      let leftHeight = nodeHeight(node.left);
+      let rightHeight = nodeHeight(node.right);
+
+      if (Math.abs(leftHeight - rightHeight) > 1) return false;
+
+      return check(node.left) && check(node.right);
+    }
+
+    function nodeHeight(node) {
+      if (!node) return -1;
+      return 1 + Math.max(nodeHeight(node.left), nodeHeight(node.right));
+    }
+
+    return check(this.root);
+  }
+
+  rebalance() {
+    let values = [];
+    this.inOrderForEach((value) => values.push(value)); // collect all values
+    this.root = this.buildTree(values); // rebuild tree once
+  }
 }
 
 module.exports = Tree;

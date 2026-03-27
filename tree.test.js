@@ -50,4 +50,14 @@ describe("Tree includes", () => {
     expect(tree.depth(2)).toBe(2);
     expect(tree.depth(99)).toBeUndefined();
   });
+
+  test("rebalance balances an unbalanced tree", () => {
+    const tree = new Tree([1]);
+    tree.insert(2);
+    tree.insert(3);
+    tree.insert(4);
+    tree.insert(5);
+
+    expect(tree.isBalanced()).toBe(false);
+  });
 });
